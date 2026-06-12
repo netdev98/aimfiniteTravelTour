@@ -1138,38 +1138,6 @@
       border-color: var(--amber)
     }
 
-    .trip-photo {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0F2A5C 0%, #1A3D7A 100%)
-    }
-
-    .trip-photo img {
-      width: 100%;
-      object-fit: cover;
-      transition: .6s cubic-bezier(.16, 1, .3, 1);
-      display: block
-    }
-
-    .trip-card:hover .trip-photo img {
-      transform: scale(1.05)
-    }
-
-    .trip-photo-grad {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(15, 42, 92, 0.72), transparent 55%)
-    }
-
-    .trip-photo-top {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      right: 14px;
-      display: flex;
-      justify-content: space-between
-    }
-
     .tdest {
       padding: 5px 12px;
       border-radius: 50px;
@@ -1207,13 +1175,6 @@
       border-radius: 50px
     }
 
-    .trip-photo-bottom {
-      position: absolute;
-      bottom: 14px;
-      left: 14px;
-      right: 14px
-    }
-
     .trip-stars {
       color: #FFD700;
       font-size: 13px;
@@ -1221,7 +1182,7 @@
     }
 
     .trip-body {
-      padding: 18px
+      padding: 22px
     }
 
     .trip-flag-row {
@@ -1261,8 +1222,10 @@
       font-size: 16px;
       font-style: italic;
       color: var(--text);
-      line-height: 1.70;
-      margin-bottom: 12px
+      line-height: 1.75;
+      margin-bottom: 14px;
+      padding-left: 14px;
+      border-left: 3px solid var(--amber)
     }
 
     .trip-chips {
@@ -2798,6 +2761,479 @@
     .sec {
       padding: 88px 5%
     }
+
+    /* ═══════════════ AUTH MODAL ═══════════════ */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s
+    }
+
+    .auth-overlay.open {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .auth-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 15, 40, 0.80);
+      backdrop-filter: blur(10px)
+    }
+
+    .auth-modal {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(5, 15, 40, 0.35);
+      transform: scale(.92) translateY(24px);
+      transition: transform .38s cubic-bezier(.34, 1.56, .64, 1), opacity .3s;
+      opacity: 0
+    }
+
+    .auth-overlay.open .auth-modal {
+      transform: scale(1) translateY(0);
+      opacity: 1
+    }
+
+    /* modal top banner */
+    .am-top {
+      background: linear-gradient(135deg, #0F2A5C 0%, #1A3D7A 60%, #2756A8 100%);
+      padding: 32px 32px 28px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .am-top::before {
+      content: '';
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.16), transparent 70%)
+    }
+
+    .am-top::after {
+      content: '';
+      position: absolute;
+      left: -40px;
+      bottom: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.08), transparent 70%)
+    }
+
+    .am-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 10;
+      width: 34px;
+      height: 34px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: rgba(255, 255, 255, .70);
+      font-size: 14px;
+      transition: .2s;
+      z-index: 2;
+      line-height: 1
+    }
+
+    .am-close:hover {
+      background: #E85D4A;
+      color: #fff;
+      border-color: #E85D4A
+    }
+
+    .am-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2
+    }
+
+    .am-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--amber);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .am-mark svg {
+      width: 22px;
+      height: 22px
+    }
+
+    .am-bname {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff !important;
+      line-height: 1
+    }
+
+    .am-bname small {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 9px;
+      color: rgba(255, 255, 255, .35);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      font-weight: 400
+    }
+
+    .am-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff !important;
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 2
+    }
+
+    .am-sub {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .55) !important;
+      position: relative;
+      z-index: 2
+    }
+
+    /* tabs */
+    .am-tabs {
+      display: flex;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 3px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 2
+    }
+
+    .am-tab {
+      flex: 1;
+      padding: 9px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      color: rgba(255, 255, 255, .55);
+      transition: .22s;
+      font-family: 'Plus Jakarta Sans', sans-serif
+    }
+
+    .am-tab.on {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.20)
+    }
+
+    /* body */
+    .am-body {
+      padding: 26px 32px 30px;
+      overflow-y: auto;
+      max-height: calc(100vh - 260px)
+    }
+
+    /* fields */
+    .am-fg {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 14px
+    }
+
+    .am-fg label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #7A90A8
+    }
+
+    .am-fg input {
+      background: #F0F7FF;
+      border: 1.5px solid #BFDBFE;
+      border-radius: 10px;
+      padding: 12px 15px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #0F2A5C;
+      outline: none;
+      transition: .2s;
+      width: 100%
+    }
+
+    .am-fg input::placeholder {
+      color: #7A90A8;
+      font-weight: 400
+    }
+
+    .am-fg input:focus {
+      border-color: #0EA5E9;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12)
+    }
+
+    .am-fg.err input {
+      border-color: #DC2626;
+      background: #FFF5F5
+    }
+
+    .am-fg .am-err {
+      font-size: 11px;
+      color: #DC2626;
+      display: none;
+      margin-top: 2px
+    }
+
+    .am-fg.err .am-err {
+      display: block
+    }
+
+    .am-fgr {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px
+    }
+
+    .am-pw-wrap {
+      position: relative
+    }
+
+    .am-pw-wrap input {
+      padding-right: 42px
+    }
+
+    .am-pw-eye {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #7A90A8;
+      font-size: 15px;
+      padding: 4px;
+      line-height: 1
+    }
+
+    .am-pw-eye:hover {
+      color: #0F2A5C
+    }
+
+    .am-forgot {
+      font-size: 12px;
+      color: #0EA5E9;
+      display: block;
+      text-align: right;
+      margin: -8px 0 14px;
+      cursor: pointer;
+      font-weight: 600
+    }
+
+    .am-forgot:hover {
+      text-decoration: underline
+    }
+
+    /* success flash */
+    .am-success {
+      background: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(14, 165, 233, 0.22);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #0F2A5C;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+      margin-bottom: 14px;
+      animation: fadeIn .3s
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    /* submit btn */
+    .am-submit {
+      width: 100%;
+      padding: 13px;
+      background: #0F2A5C;
+      color: #fff;
+      border: none;
+      border-radius: 11px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .22s;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px
+    }
+
+    .am-submit:hover {
+      background: #1A3D7A;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(15, 42, 92, 0.22)
+    }
+
+    .am-submit:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    /* divider + social */
+    .am-div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #7A90A8;
+      font-size: 12px;
+      margin: 16px 0
+    }
+
+    .am-div::before,
+    .am-div::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #BFDBFE
+    }
+
+    .am-soc {
+      display: flex;
+      gap: 10px
+    }
+
+    .am-soc-btn {
+      flex: 1;
+      padding: 10px;
+      border: 1.5px solid #BFDBFE;
+      border-radius: 10px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      color: #3D5470;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: .2s
+    }
+
+    .am-soc-btn:hover {
+      border-color: #0EA5E9;
+      color: #0EA5E9
+    }
+
+    /* terms */
+    .am-terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: #7A90A8;
+      margin: 10px 0 4px;
+      line-height: 1.5
+    }
+
+    .am-terms input[type=checkbox] {
+      margin-top: 2px;
+      accent-color: #0F2A5C;
+      cursor: pointer;
+      flex-shrink: 0;
+      width: 14px;
+      height: 14px
+    }
+
+    .am-terms a {
+      color: #0EA5E9;
+      cursor: pointer
+    }
+
+    .am-terms a:hover {
+      text-decoration: underline
+    }
+
+    /* switch link */
+    .am-switch {
+      text-align: center;
+      font-size: 13px;
+      color: #7A90A8;
+      margin-top: 16px
+    }
+
+    .am-switch a {
+      color: #0EA5E9;
+      font-weight: 700;
+      cursor: pointer
+    }
+
+    .am-switch a:hover {
+      text-decoration: underline
+    }
+
+    @media(max-width:520px) {
+      .auth-overlay {
+        padding: 12px
+      }
+
+      .am-top {
+        padding: 24px 22px 22px
+      }
+
+      .am-body {
+        padding: 20px 22px 24px
+      }
+
+      .am-fgr {
+        grid-template-columns: 1fr
+      }
+    }
   </style>
 </head>
 
@@ -2824,7 +3260,11 @@
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="nav-right"><a href="#contact" class="btn btn-amber btn-sm">Get In Touch</a></div>
+    <div class="nav-right">
+      <button onclick="openAuthModal('login')" class="btn btn-ghost-w btn-sm"
+        style="padding:9px 20px;font-size:13px">Sign In</button>
+      <a href="#contact" class="btn btn-amber btn-sm">Get In Touch</a>
+    </div>
     <div class="burger" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </nav>
   <div class="mob" id="mob">
@@ -2834,7 +3274,11 @@
     <a href="#packages" onclick="closeMob()">Packages</a>
     <a href="#reviews" onclick="closeMob()">Reviews</a>
     <a href="#contact" onclick="closeMob()">Contact</a>
-    <div class="mob-btns"><a href="#contact" class="btn btn-amber btn-sm" onclick="closeMob()">Get In Touch</a></div>
+    <div class="mob-btns">
+      <button onclick="openAuthModal('login');closeMob()" class="btn btn-ghost-w btn-sm"
+        style="border-color:rgba(255,255,255,0.30)">Sign In</button>
+      <a href="#contact" class="btn btn-amber btn-sm" onclick="closeMob()">Get In Touch</a>
+    </div>
   </div>
 
   <!-- HERO -->
@@ -3366,32 +3810,32 @@
       { n: 'Kawasan Falls', loc: 'Badian, South Cebu', badge: 'Cebu', cls: 'ss-cebu', sub: 'The iconic 3-tiered turquoise waterfall in the jungle', img: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=700&q=85' },
       { n: 'Kalanggaman Island', loc: 'Northern Cebu', badge: 'Cebu', cls: 'ss-cebu', sub: 'The Philippines\' most iconic long white sandbar', img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=85' },
       { n: 'Alona Beach', loc: 'Panglao, Bohol', badge: 'Bohol', cls: 'ss-bohol', sub: 'World-class diving and breathtaking sunsets', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=85' },
-      { n: 'Philippine Tarsier Sanctuary', loc: 'Corella, Bohol', badge: 'Bohol', cls: 'ss-bohol', sub: "World's smallest primate in its natural habitat", img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&q=85' },
-      { n: 'Balicasag Marine Sanctuary', loc: 'Panglao, Bohol', badge: 'Bohol', cls: 'ss-bohol', sub: 'Hawksbill sea turtles and pristine coral walls', img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=700&q=85' },
-      { n: 'Loboc River', loc: 'Loboc, Bohol', badge: 'Bohol', cls: 'ss-bohol', sub: 'Floating restaurant cruise through jungle serenity', img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=85' },
-      { n: "Magellan's Cross & Heritage", loc: 'Cebu City', badge: 'Cebu', cls: 'ss-cebu', sub: '500 years of Philippine history in one district', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85' },
-      { n: 'Bantayan Island', loc: 'Northern Cebu', badge: 'Cebu', cls: 'ss-cebu', sub: 'Unhurried beaches and traditional fishing villages', img: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=700&q=85' }
+      { n: 'Philippine Tarsier Sanctuary', loc: 'Corella, Bohol', badge: 'Bohol', cls: 'ss-bohol', sub: "World's smallest primate in its natural habitat", img: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=700&q=85' },
+      { n: 'Balicasag Marine Sanctuary', loc: 'Panglao, Bohol', badge: 'Bohol', cls: 'ss-bohol', sub: 'Hawksbill sea turtles and pristine coral walls', img: 'https://images.unsplash.com/photo-1559628129-67cf63b72248?w=700&q=85' },
+      { n: 'Loboc River', loc: 'Loboc, Bohol', badge: 'Bohol', cls: 'ss-bohol', sub: 'Floating restaurant cruise through jungle serenity', img: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=700&q=85' },
+      { n: "Magellan's Cross & Heritage", loc: 'Cebu City', badge: 'Cebu', cls: 'ss-cebu', sub: '500 years of Philippine history in one district', img: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=700&q=85' },
+      { n: 'Bantayan Island', loc: 'Northern Cebu', badge: 'Cebu', cls: 'ss-cebu', sub: 'Unhurried beaches and traditional fishing villages', img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=85' }
     ];
 
     const PAST_TRIPS = [
-      { dest: 'cebu', dc: 'cebu', date: 'March 2025', flag: '🇯🇵', name: 'Yuki Tanaka', from: 'Tokyo, Japan', pkg: 'Cebu South Adventure', stars: 5, img: 'https://images.unsplash.com/photo-1559628129-67cf63b72248?w=600&q=80', quote: '"I have dived in 14 countries. Nothing — nothing — compares to swimming alongside a whale shark. The moment it glided past me, I burst into tears of pure joy."', spots: ['Oslob Whale Sharks', 'Sumilon Sandbar', 'Kawasan Falls', 'Moalboal Sardines', 'Tumalog Falls'] },
-      { dest: 'bohol', dc: 'bohol', date: 'February 2025', flag: '🇦🇺', name: 'Emma Sullivan', from: 'Sydney, Australia', pkg: 'Bohol Classic Discovery', stars: 5, img: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=600&q=80', quote: '"Watching the sunrise over the Chocolate Hills was a moment I had dreamed of for years. Being there in the quiet before anyone else arrived was more beautiful than any photo."', spots: ['Chocolate Hills', 'Tarsier Sanctuary', 'Loboc River', 'Baclayon Church', 'Blood Compact Shrine'] },
-      { dest: 'cebu', dc: 'cebu', date: 'January 2025', flag: '🇩🇪', name: 'Klaus & Maria Weber', from: 'Munich, Germany', pkg: 'Cebu North Island Escape', stars: 5, img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80', quote: '"Kalanggaman Island is unlike anything we have seen in Europe. Our Aimfinite Travel and Tour guide knew exactly when the light was perfect for photos. A truly special experience."', spots: ['Kalanggaman Island', 'Bantayan Beach', 'Dakit-Dakit Falls', 'Malapascua Island', 'Silica Sand Beach'] },
-      { dest: 'combo', dc: 'combo', date: 'December 2024', flag: '🇺🇸', name: 'Michael Torres', from: 'San Francisco, USA', pkg: 'Cebu + Bohol Combo', stars: 5, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80', quote: '"Four days felt like two lifetimes of memories. The private van meant we stopped whenever we wanted. That freedom — guided by Jolito and Cheryl — is something money can\'t buy."', spots: ['Oslob Whale Sharks', 'Kawasan Falls', 'Chocolate Hills', 'Tarsier Sanctuary', 'Balicasag Turtles'] },
-      { dest: 'bohol', dc: 'bohol', date: 'November 2024', flag: '🇬🇧', name: 'Oliver & Priya Hughes', from: 'London, United Kingdom', pkg: 'Bohol Beach & Island', stars: 5, img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80', quote: '"The boodle fight dinner under the stars was the most romantic night of our lives. We got engaged that evening on Bantayan Island. Aimfinite Travel and Tour made that memory possible."', spots: ['Alona Beach', 'Hinagdanan Cave', 'Balicasag Sanctuary', 'Virgin Island', 'Doljo Sunset'] },
-      { dest: 'cebu', dc: 'cebu', date: 'October 2024', flag: '🇸🇬', name: 'Amanda Lim', from: 'Singapore', pkg: 'Cebu Heritage & Mountain', stars: 5, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', quote: '"Tops Lookout at sunset over Cebu City was a view that should be on every travel bucket list. Cheryl also took us to a hidden carinderia for lechon no guidebook ever shows."', spots: ["Magellan's Cross", "Fort San Pedro", "Taoist Temple", "Tops Lookout", "Sirao Flower Garden"] },
-      { dest: 'bohol', dc: 'bohol', date: 'September 2024', flag: '🇫🇷', name: 'Camille & Jules Dubois', from: 'Paris, France', pkg: 'Bohol Classic Discovery', stars: 5, img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80', quote: '"The Loboc River lunch was three hours of floating through a jungle cathedral with live music and the best food of our trip. Jolito made us feel like family. Magnifique."', spots: ['Chocolate Hills', 'Tarsier Sanctuary', 'Loboc River Cruise', 'Blood Compact Shrine', 'Baclayon Church'] },
-      { dest: 'combo', dc: 'combo', date: 'August 2024', flag: '🇰🇷', name: 'Ji-Eun Park', from: 'Seoul, South Korea', pkg: 'Cebu + Bohol Combo', stars: 5, img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80', quote: '"I am a professional travel photographer with 40+ countries visited. Kalanggaman Island is the most visually perfect place I have ever photographed. I left a piece of my heart in the Philippines."', spots: ['Oslob Whale Sharks', 'Sumilon Sandbar', 'Chocolate Hills', 'Loboc River', 'Balicasag Turtles'] },
-      { dest: 'cebu', dc: 'cebu', date: 'July 2024', flag: '🇮🇹', name: 'Marco Rossi', from: 'Milan, Italy', pkg: 'Cebu South Adventure', stars: 5, img: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&q=80', quote: '"The Sardine Run at Moalboal is something from a nature documentary — except you are inside it. Millions of fish swirling around you like a living storm. I had to remind myself to breathe."', spots: ['Moalboal Sardine Run', 'Kawasan Falls', 'Tumalog Falls', 'Sumilon Sandbar', 'Oslob Whale Sharks'] }
+      { dest: 'cebu', dc: 'cebu', date: 'March 2025', flag: '🇯🇵', name: 'Yuki Tanaka', from: 'Tokyo, Japan', pkg: 'Cebu South Adventure', stars: 5, img: 'https://images.unsplash.com/photo-1559628129-67cf63b72248?w=600&q=85', quote: '"I have dived in 14 countries. Nothing — nothing — compares to swimming alongside a whale shark. The moment it glided past me, I burst into tears of pure joy."', spots: ['Oslob Whale Sharks', 'Sumilon Sandbar', 'Kawasan Falls', 'Moalboal Sardines', 'Tumalog Falls'] },
+      { dest: 'bohol', dc: 'bohol', date: 'February 2025', flag: '🇦🇺', name: 'Emma Sullivan', from: 'Sydney, Australia', pkg: 'Bohol Classic Discovery', stars: 5, img: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=600&q=85', quote: '"Watching the sunrise over the Chocolate Hills was a moment I had dreamed of for years. Being there in the quiet before anyone else arrived was more beautiful than any photo."', spots: ['Chocolate Hills', 'Tarsier Sanctuary', 'Loboc River', 'Baclayon Church', 'Blood Compact Shrine'] },
+      { dest: 'cebu', dc: 'cebu', date: 'January 2025', flag: '🇩🇪', name: 'Klaus & Maria Weber', from: 'Munich, Germany', pkg: 'Cebu North Island Escape', stars: 5, img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=85', quote: '"Kalanggaman Island is unlike anything we have seen in Europe. Our Aimfinite Travel and Tour guide knew exactly when the light was perfect for photos. A truly special experience."', spots: ['Kalanggaman Island', 'Bantayan Beach', 'Dakit-Dakit Falls', 'Malapascua Island', 'Silica Sand Beach'] },
+      { dest: 'combo', dc: 'combo', date: 'December 2024', flag: '🇺🇸', name: 'Michael Torres', from: 'San Francisco, USA', pkg: 'Cebu + Bohol Combo', stars: 5, img: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&q=85', quote: '"Four days felt like two lifetimes of memories. The private van meant we stopped whenever we wanted. That freedom — guided by Jolito and Cheryl — is something money can\'t buy."', spots: ['Oslob Whale Sharks', 'Kawasan Falls', 'Chocolate Hills', 'Tarsier Sanctuary', 'Balicasag Turtles'] },
+      { dest: 'bohol', dc: 'bohol', date: 'November 2024', flag: '🇬🇧', name: 'Oliver & Priya Hughes', from: 'London, United Kingdom', pkg: 'Bohol Beach & Island', stars: 5, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=85', quote: '"The boodle fight dinner under the stars was the most romantic night of our lives. We got engaged that evening on Bantayan Island. Aimfinite Travel and Tour made that memory possible."', spots: ['Alona Beach', 'Hinagdanan Cave', 'Balicasag Sanctuary', 'Virgin Island', 'Doljo Sunset'] },
+      { dest: 'cebu', dc: 'cebu', date: 'October 2024', flag: '🇸🇬', name: 'Amanda Lim', from: 'Singapore', pkg: 'Cebu Heritage & Mountain', stars: 5, img: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=85', quote: '"Tops Lookout at sunset over Cebu City was a view that should be on every travel bucket list. Cheryl also took us to a hidden carinderia for lechon no guidebook ever shows."', spots: ["Magellan's Cross", "Fort San Pedro", "Taoist Temple", "Tops Lookout", "Sirao Flower Garden"] },
+      { dest: 'bohol', dc: 'bohol', date: 'September 2024', flag: '🇫🇷', name: 'Camille & Jules Dubois', from: 'Paris, France', pkg: 'Bohol Classic Discovery', stars: 5, img: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=600&q=85', quote: '"The Loboc River lunch was three hours of floating through a jungle cathedral with live music and the best food of our trip. Jolito made us feel like family. Magnifique."', spots: ['Chocolate Hills', 'Tarsier Sanctuary', 'Loboc River Cruise', 'Blood Compact Shrine', 'Baclayon Church'] },
+      { dest: 'combo', dc: 'combo', date: 'August 2024', flag: '🇰🇷', name: 'Ji-Eun Park', from: 'Seoul, South Korea', pkg: 'Cebu + Bohol Combo', stars: 5, img: 'https://images.unsplash.com/photo-1559628129-67cf63b72248?w=600&q=85', quote: '"I am a professional travel photographer with 40+ countries visited. Kalanggaman Island is the most visually perfect place I have ever photographed. I left a piece of my heart in the Philippines."', spots: ['Oslob Whale Sharks', 'Sumilon Sandbar', 'Chocolate Hills', 'Loboc River', 'Balicasag Turtles'] },
+      { dest: 'cebu', dc: 'cebu', date: 'July 2024', flag: '🇮🇹', name: 'Marco Rossi', from: 'Milan, Italy', pkg: 'Cebu South Adventure', stars: 5, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=85', quote: '"The Sardine Run at Moalboal is something from a nature documentary — except you are inside it. Millions of fish swirling around you like a living storm. I had to remind myself to breathe."', spots: ['Moalboal Sardine Run', 'Kawasan Falls', 'Tumalog Falls', 'Sumilon Sandbar', 'Oslob Whale Sharks'] }
     ];
 
     const PKGS = [
-      { id: 1, dest: 'cebu', dl: 'Cebu', name: 'Cebu South Adventure', days: 2, nights: 1, ppp: 3499, p2: 6998, p4: 11998, best: true, stars: 4.9, rev: 312, img: 'https://images.unsplash.com/photo-1559628129-67cf63b72248?w=800&q=80', hl: ['🦈 Oslob Whale Sharks', '🏖️ Sumilon Sandbar', '🐟 Moalboal Sardine Run', '💧 Kawasan Falls', '🌊 Tumalog Falls'], desc: 'Swim with whale sharks at dawn, float on the legendary Sumilon sandbar, witness the sardine tornado, and trek to two stunning waterfalls — all in one overnight package.', spots: ['🦈 Oslob Whale Shark Watching', '🏖️ Sumilon Island Sandbar', '🐟 Moalboal Sardine Run', '💧 Kawasan Falls', '🌊 Tumalog Hidden Falls'], food: ['Hotel breakfast', 'Buffet lunch at Sumilon Resort', 'Merienda: buko & fruits', 'Welcome dinner: fresh seafood'], drinks: ['Welcome fresh buko juice', 'Cold refreshments in van', 'Unlimited water & softdrinks'], hotel: '1 night · Moalboal Poolside Inn · breakfast for 2', car: 'Private A/C Toyota Hi-Ace · 2-day use · all fuel & ferry included', itin: [{ d: 'Day 1 · 4 AM', t: 'Oslob Whale Sharks', s: 'Pre-dawn pickup. 3-hr drive south. Swim alongside 20-ft whale sharks at sunrise.' }, { d: 'Day 1 · 9 AM', t: 'Sumilon Island', s: 'Boat to Sumilon — snorkel, sandbar, resort buffet lunch.' }, { d: 'Day 1 · 2 PM', t: 'Moalboal Sardine Run', s: 'Snorkel over millions of sardines forming a living tornado.' }, { d: 'Day 1 · 7 PM', t: 'Hotel & Dinner', s: 'Check into Moalboal resort. Beachside welcome seafood dinner.' }, { d: 'Day 2 · 7 AM', t: 'Kawasan Falls', s: 'Breakfast then jungle hike to the 3-tier turquoise Kawasan Falls.' }, { d: 'Day 2 · 11 AM', t: 'Tumalog Falls & Return', s: 'Hidden silky curtain waterfall before the drive back to Cebu City.' }] },
-      { id: 2, dest: 'cebu', dl: 'Cebu', name: 'Cebu Heritage & Mountain', days: 2, nights: 1, ppp: 2999, p2: 5998, p4: 9998, best: false, stars: 4.8, rev: 198, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', hl: ["🕍 Magellan's Cross", "🏰 Fort San Pedro", "🏯 Taoist Temple", "🌆 Tops Lookout", "🌸 Sirao Flower Garden"], desc: '500 years of Philippine history by day, panoramic sunset from 600 meters above sea level, and a morning among a million blooming flowers.', spots: ["🕍 Magellan's Cross & Basilica", "🏰 Fort San Pedro (1565)", "🏯 Taoist Temple", "🌆 Tops Lookout – 600m", "🌸 Sirao Flower Garden"], food: ['Hotel breakfast', 'Hilltop lunch with views', 'Merienda: kakanin & coffee', 'Dinner: Carbon Market food tour – lechon, kinilaw'], drinks: ['Welcome buko juice', 'Coffee & tea at merienda', 'Cold drinks at Tops'], hotel: '1 night · Cebu City Hotel · city view · breakfast for 2', car: 'Private A/C car · full 2-day use · driver + fuel', itin: [{ d: 'Day 1 · 8 AM', t: 'Heritage District', s: "Magellan's Cross, Basilica, Fort San Pedro — 500 years of Filipino history." }, { d: 'Day 1 · 12 PM', t: 'Carbon Market Lunch', s: 'Authentic lechon, puso rice, kinilaw, and local sweets at the oldest Cebu market.' }, { d: 'Day 1 · 2 PM', t: 'Taoist Temple', s: 'Drive up to Beverly Hills. Climb 80 dragon-lined steps.' }, { d: 'Day 1 · 4 PM', t: 'Tops Lookout Sunset', s: '600 meters above Cebu — golden sunset over the city skyline.' }, { d: 'Day 2 · 8 AM', t: 'Sirao Flower Garden', s: 'Thousands of vibrant celosia blooms in the Cebu highlands.' }] },
-      { id: 3, dest: 'bohol', dl: 'Bohol', name: 'Bohol Classic Discovery', days: 2, nights: 1, ppp: 4299, p2: 8598, p4: 14498, best: true, stars: 4.9, rev: 445, img: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=800&q=80', hl: ['🌄 Chocolate Hills', '🐒 Tarsier Sanctuary', '⛴️ Loboc River Cruise', '⚔️ Blood Compact Shrine', '⛪ Baclayon Church 1595'], desc: 'See the Chocolate Hills at golden hour AND sunrise with an overnight stay. Meet the world\'s smallest primate, drift the Loboc River with live music, and walk through Philippine history.', spots: ['🌄 Chocolate Hills – 1,268 Cones', '🐒 Philippine Tarsier Sanctuary', '⛴️ Loboc River Floating Restaurant', '⚔️ Blood Compact Shrine', '⛪ Baclayon Stone Church (1595)'], food: ['Organic breakfast at Bohol Bee Farm', 'Loboc River buffet lunch (cultural show)', 'Merienda: honey & bee pollen tasting', 'Dinner: Boholano set – kinilaw, crispy pata, coconut'], drinks: ['Welcome fresh coconut water at port', 'Bee Farm honeybee lemonade & salabat', 'Unlimited softdrinks & water'], hotel: '1 night · Bohol Bee Farm Eco-Resort · organic breakfast · clifftop ocean view', car: 'Private A/C Toyota Hi-Ace from Tagbilaran · full 2-day Bohol use', itin: [{ d: 'Day 1 · 8 AM', t: 'Fast Ferry Cebu → Bohol', s: 'Board fast ferry Pier 1 Cebu (2 hrs). Welcome coconut water at Tagbilaran.' }, { d: 'Day 1 · 11 AM', t: 'Baclayon Church & Blood Compact', s: 'One of the oldest stone churches in Asia (1595) + the historic Blood Compact Shrine.' }, { d: 'Day 1 · 1 PM', t: 'Loboc River Cruise', s: 'Floating restaurant with Filipino buffet and live cultural dance.' }, { d: 'Day 1 · 3 PM', t: 'Tarsier Sanctuary', s: "World's smallest primate — they can turn heads 180°. Strict no-flash photography." }, { d: 'Day 1 · 6 PM', t: 'Bee Farm Dinner', s: 'Clifftop organic dinner at Bohol Bee Farm with honey cocktails and ocean sunset.' }, { d: 'Day 2 · 5:30 AM', t: 'Chocolate Hills Sunrise', s: 'Climb before the tour buses. Watch 1,268 hills glow golden pink at dawn.' }] },
-      { id: 4, dest: 'bohol', dl: 'Bohol', name: 'Bohol Beach & Island', days: 2, nights: 1, ppp: 4799, p2: 9598, p4: 16198, best: false, stars: 4.8, rev: 167, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80', hl: ['🕳️ Hinagdanan Cave', '🐢 Balicasag Turtles', '🏖️ Alona Beach', '🏝️ Virgin Island Sandbar', '🌅 Doljo Beach Sunset'], desc: "Bohol's most spectacular beaches and underwater world in one package — a glowing underground cave pool, sea turtles in a UNESCO sanctuary, a secret disappearing sandbar, and the best sunset in Bohol.", spots: ['🕳️ Hinagdanan Cave Underground Pool', '🐢 Balicasag Marine Sanctuary', '🏖️ Alona Beach – Panglao Island', '🏝️ Virgin Island Sandbar', '🌅 Doljo Beach – Bohol\'s Best Sunset'], food: ['Hotel breakfast with tropical fruits', 'Alona Beach BBQ lunch – grilled squid & garlic rice', 'Mango & buko shake at the beach', 'Seafood dinner at Doljo – lobster, shrimp & fish'], drinks: ['Welcome buko juice', 'Mango & banana shakes', 'Cold softdrinks & water with meals'], hotel: '1 night · Alona Beach Resort · beachfront · breakfast for 2 · kayak use', car: 'Private A/C van from Tagbilaran + all boat hires for Balicasag & Virgin Island · full 2 days', itin: [{ d: 'Day 1 · 8 AM', t: 'Fast Ferry + Drive to Panglao', s: 'Fast ferry from Cebu City. Private van to Panglao Island (40 min).' }, { d: 'Day 1 · 11 AM', t: 'Hinagdanan Cave', s: 'Magical underground cave — turquoise pool, stalactites glowing in filtered light.' }, { d: 'Day 1 · 1 PM', t: 'Alona Beach BBQ Lunch', s: 'Beachfront BBQ. Free time to swim, snorkel, or explore the beach strip.' }, { d: 'Day 1 · 5 PM', t: 'Doljo Beach Sunset Dinner', s: 'Seafood dinner on the beach as the sky turns orange and pink.' }, { d: 'Day 2 · 7 AM', t: 'Balicasag Island', s: 'Boat to Balicasag Marine Sanctuary. Snorkel with hawksbill sea turtles.' }, { d: 'Day 2 · 11 AM', t: 'Virgin Island Sandbar', s: 'Secret sandbar at low tide — white sand in turquoise sea. Floating lunch here.' }] },
-      { id: 5, dest: 'cebu', dl: 'Cebu', name: 'Cebu North Island Escape', days: 2, nights: 1, ppp: 3299, p2: 6598, p4: 10998, best: false, stars: 5.0, rev: 87, img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80', hl: ['🏝️ Kalanggaman Island', '🌴 Bantayan Beach', '💧 Dakit-Dakit Falls', '⛵ Malapascua Island', '🐚 Silica Sand Beach'], desc: 'Head north where the Philippines is at its most unspoiled — the legendary Kalanggaman sandbar, a beachfront night in Bantayan, a dawn boat to Malapascua, and a hidden falls detour on the way back.', spots: ['🏝️ Kalanggaman Island Long Sandbar', '🌴 Bantayan Island Beachfront', '💧 Dakit-Dakit Hidden Falls', '⛵ Malapascua Island', '🐚 Silica Sand Beach, Medellin'], food: ['Early coffee & pandesal', 'Island BBQ lunch on Kalanggaman', 'Calamares & buko snacks at Bantayan', 'Bantayan seafood boodle fight dinner', 'Hotel breakfast'], drinks: ['Welcome buko juice', 'Fresh fruit shakes at Bantayan', 'Cold refreshments in van', 'Unlimited water & softdrinks'], hotel: '1 night · Bantayan Island Beach Resort · beachfront · breakfast for 2', car: 'Private A/C van Cebu City to Hagnaya Port + all ferry crossings + full-tour driver', itin: [{ d: 'Day 1 · 5 AM', t: 'Drive to Hagnaya Port', s: 'Pre-dawn departure. 3-hour scenic north coast drive. Fast boat to Kalanggaman.' }, { d: 'Day 1 · 9 AM', t: 'Kalanggaman Island', s: "Philippines' most iconic sandbar. Snorkel, swim, and island BBQ lunch." }, { d: 'Day 1 · 2 PM', t: 'Ferry to Bantayan', s: 'Beautiful, unhurried Bantayan Island. Afternoon free time on the beach.' }, { d: 'Day 1 · 7 PM', t: 'Boodle Fight Dinner', s: 'Filipino feast on banana leaves — fresh seafood under the stars.' }, { d: 'Day 2 · 7 AM', t: 'Malapascua Island', s: 'Banca to Malapascua — world-famous for thresher shark sightings.' }, { d: 'Day 2 · 2 PM', t: 'Dakit-Dakit Falls & Return', s: 'Hidden falls detour before the drive back to Cebu City.' }] },
-      { id: 6, dest: 'combo', dl: 'Cebu + Bohol', name: 'Ultimate Cebu + Bohol Combo', days: 4, nights: 3, ppp: 9999, p2: 19998, p4: 33998, best: true, stars: 5.0, rev: 203, img: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80', hl: ['🦈 Oslob Whale Sharks', '💧 Kawasan Falls', '🌄 Chocolate Hills Sunrise', '🐒 Tarsier Sanctuary', '🐢 Balicasag Turtles'], desc: 'The definitive Philippine island adventure — 4 days, 2 islands, 3 hotels, every meal, all drinks, a private car, and fast ferry both ways. The complete Jolito & Cheryl experience.', spots: ['🦈 Oslob Whale Sharks (Cebu Day 2)', '💧 Kawasan Falls (Cebu Day 2)', '🐒 Tarsier Sanctuary (Bohol Day 3)', '🌄 Chocolate Hills Sunrise (Bohol Day 4)', '🐢 Balicasag Marine Sanctuary (Bohol Day 4)'], food: ['Day 1: Heritage lunch & welcome dinner', 'Day 2: Island buffet lunch & seafood dinner', 'Day 3: Organic breakfast + Loboc River buffet + Boholano dinner', 'Day 4: Beachfront breakfast & floating BBQ lunch'], drinks: ['Daily welcome drinks (buko, mango or pineapple)', 'Unlimited water & softdrinks all 4 days', 'Bee Farm specialty drinks Day 3'], hotel: '3 nights: Night 1–2 Cebu City Hotel · Night 3 Bohol Bee Farm Eco-Resort · breakfast all days', car: 'Private A/C Toyota Hi-Ace · 4 full days · dedicated driver · fast ferry Cebu↔Bohol both ways', itin: [{ d: 'Day 1 – Cebu', t: 'Arrival & Heritage City Tour', s: "Airport pickup. Check-in. Heritage tour: Magellan's Cross, Fort San Pedro, Tops Lookout. Welcome dinner." }, { d: 'Day 2 – Cebu South', t: 'Whale Sharks + Sumilon + Kawasan Falls', s: '4 AM for Oslob whale sharks. Sumilon Island buffet lunch. Kawasan Falls trek. Overnight Moalboal.' }, { d: 'Day 3 – Bohol', t: 'Ferry + Tarsiers + Loboc + Chocolate Hills', s: 'Morning ferry Cebu→Bohol. Tarsier Sanctuary, Loboc River lunch, golden hour at Chocolate Hills.' }, { d: 'Day 4 – Bohol Islands', t: 'Chocolate Hills Sunrise + Balicasag + Return', s: '6 AM sunrise at Chocolate Hills. Boat to Balicasag sea turtles. Afternoon ferry back to Cebu.' }] }
+      { id: 1, dest: 'cebu', dl: 'Cebu', name: 'Cebu South Adventure', days: 2, nights: 1, ppp: 3499, p2: 6998, p4: 11998, best: true, stars: 4.9, rev: 312, img: 'https://images.unsplash.com/photo-1559628129-67cf63b72248?w=800&q=85', hl: ['🦈 Oslob Whale Sharks', '🏖️ Sumilon Sandbar', '🐟 Moalboal Sardine Run', '💧 Kawasan Falls', '🌊 Tumalog Falls'], desc: 'Swim with whale sharks at dawn, float on the legendary Sumilon sandbar, witness the sardine tornado, and trek to two stunning waterfalls — all in one overnight package.', spots: ['🦈 Oslob Whale Shark Watching', '🏖️ Sumilon Island Sandbar', '🐟 Moalboal Sardine Run', '💧 Kawasan Falls', '🌊 Tumalog Hidden Falls'], food: ['Hotel breakfast', 'Buffet lunch at Sumilon Resort', 'Merienda: buko & fruits', 'Welcome dinner: fresh seafood'], drinks: ['Welcome fresh buko juice', 'Cold refreshments in van', 'Unlimited water & softdrinks'], hotel: '1 night · Moalboal Poolside Inn · breakfast for 2', car: 'Private A/C Toyota Hi-Ace · 2-day use · all fuel & ferry included', itin: [{ d: 'Day 1 · 4 AM', t: 'Oslob Whale Sharks', s: 'Pre-dawn pickup. 3-hr drive south. Swim alongside 20-ft whale sharks at sunrise.' }, { d: 'Day 1 · 9 AM', t: 'Sumilon Island', s: 'Boat to Sumilon — snorkel, sandbar, resort buffet lunch.' }, { d: 'Day 1 · 2 PM', t: 'Moalboal Sardine Run', s: 'Snorkel over millions of sardines forming a living tornado.' }, { d: 'Day 1 · 7 PM', t: 'Hotel & Dinner', s: 'Check into Moalboal resort. Beachside welcome seafood dinner.' }, { d: 'Day 2 · 7 AM', t: 'Kawasan Falls', s: 'Breakfast then jungle hike to the 3-tier turquoise Kawasan Falls.' }, { d: 'Day 2 · 11 AM', t: 'Tumalog Falls & Return', s: 'Hidden silky curtain waterfall before the drive back to Cebu City.' }] },
+      { id: 2, dest: 'cebu', dl: 'Cebu', name: 'Cebu Heritage & Mountain', days: 2, nights: 1, ppp: 2999, p2: 5998, p4: 9998, best: false, stars: 4.8, rev: 198, img: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=85', hl: ["🕍 Magellan's Cross", "🏰 Fort San Pedro", "🏯 Taoist Temple", "🌆 Tops Lookout", "🌸 Sirao Flower Garden"], desc: '500 years of Philippine history by day, panoramic sunset from 600 meters above sea level, and a morning among a million blooming flowers.', spots: ["🕍 Magellan's Cross & Basilica", "🏰 Fort San Pedro (1565)", "🏯 Taoist Temple", "🌆 Tops Lookout – 600m", "🌸 Sirao Flower Garden"], food: ['Hotel breakfast', 'Hilltop lunch with views', 'Merienda: kakanin & coffee', 'Dinner: Carbon Market food tour – lechon, kinilaw'], drinks: ['Welcome buko juice', 'Coffee & tea at merienda', 'Cold drinks at Tops'], hotel: '1 night · Cebu City Hotel · city view · breakfast for 2', car: 'Private A/C car · full 2-day use · driver + fuel', itin: [{ d: 'Day 1 · 8 AM', t: 'Heritage District', s: "Magellan's Cross, Basilica, Fort San Pedro — 500 years of Filipino history." }, { d: 'Day 1 · 12 PM', t: 'Carbon Market Lunch', s: 'Authentic lechon, puso rice, kinilaw, and local sweets at the oldest Cebu market.' }, { d: 'Day 1 · 2 PM', t: 'Taoist Temple', s: 'Drive up to Beverly Hills. Climb 80 dragon-lined steps.' }, { d: 'Day 1 · 4 PM', t: 'Tops Lookout Sunset', s: '600 meters above Cebu — golden sunset over the city skyline.' }, { d: 'Day 2 · 8 AM', t: 'Sirao Flower Garden', s: 'Thousands of vibrant celosia blooms in the Cebu highlands.' }] },
+      { id: 3, dest: 'bohol', dl: 'Bohol', name: 'Bohol Classic Discovery', days: 2, nights: 1, ppp: 4299, p2: 8598, p4: 14498, best: true, stars: 4.9, rev: 445, img: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=800&q=85', hl: ['🌄 Chocolate Hills', '🐒 Tarsier Sanctuary', '⛴️ Loboc River Cruise', '⚔️ Blood Compact Shrine', '⛪ Baclayon Church 1595'], desc: 'See the Chocolate Hills at golden hour AND sunrise with an overnight stay. Meet the world\'s smallest primate, drift the Loboc River with live music, and walk through Philippine history.', spots: ['🌄 Chocolate Hills – 1,268 Cones', '🐒 Philippine Tarsier Sanctuary', '⛴️ Loboc River Floating Restaurant', '⚔️ Blood Compact Shrine', '⛪ Baclayon Stone Church (1595)'], food: ['Organic breakfast at Bohol Bee Farm', 'Loboc River buffet lunch (cultural show)', 'Merienda: honey & bee pollen tasting', 'Dinner: Boholano set – kinilaw, crispy pata, coconut'], drinks: ['Welcome fresh coconut water at port', 'Bee Farm honeybee lemonade & salabat', 'Unlimited softdrinks & water'], hotel: '1 night · Bohol Bee Farm Eco-Resort · organic breakfast · clifftop ocean view', car: 'Private A/C Toyota Hi-Ace from Tagbilaran · full 2-day Bohol use', itin: [{ d: 'Day 1 · 8 AM', t: 'Fast Ferry Cebu → Bohol', s: 'Board fast ferry Pier 1 Cebu (2 hrs). Welcome coconut water at Tagbilaran.' }, { d: 'Day 1 · 11 AM', t: 'Baclayon Church & Blood Compact', s: 'One of the oldest stone churches in Asia (1595) + the historic Blood Compact Shrine.' }, { d: 'Day 1 · 1 PM', t: 'Loboc River Cruise', s: 'Floating restaurant with Filipino buffet and live cultural dance.' }, { d: 'Day 1 · 3 PM', t: 'Tarsier Sanctuary', s: "World's smallest primate — they can turn heads 180°. Strict no-flash photography." }, { d: 'Day 1 · 6 PM', t: 'Bee Farm Dinner', s: 'Clifftop organic dinner at Bohol Bee Farm with honey cocktails and ocean sunset.' }, { d: 'Day 2 · 5:30 AM', t: 'Chocolate Hills Sunrise', s: 'Climb before the tour buses. Watch 1,268 hills glow golden pink at dawn.' }] },
+      { id: 4, dest: 'bohol', dl: 'Bohol', name: 'Bohol Beach & Island', days: 2, nights: 1, ppp: 4799, p2: 9598, p4: 16198, best: false, stars: 4.8, rev: 167, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=85', hl: ['🕳️ Hinagdanan Cave', '🐢 Balicasag Turtles', '🏖️ Alona Beach', '🏝️ Virgin Island Sandbar', '🌅 Doljo Beach Sunset'], desc: "Bohol's most spectacular beaches and underwater world in one package — a glowing underground cave pool, sea turtles in a UNESCO sanctuary, a secret disappearing sandbar, and the best sunset in Bohol.", spots: ['🕳️ Hinagdanan Cave Underground Pool', '🐢 Balicasag Marine Sanctuary', '🏖️ Alona Beach – Panglao Island', '🏝️ Virgin Island Sandbar', '🌅 Doljo Beach – Bohol\'s Best Sunset'], food: ['Hotel breakfast with tropical fruits', 'Alona Beach BBQ lunch – grilled squid & garlic rice', 'Mango & buko shake at the beach', 'Seafood dinner at Doljo – lobster, shrimp & fish'], drinks: ['Welcome buko juice', 'Mango & banana shakes', 'Cold softdrinks & water with meals'], hotel: '1 night · Alona Beach Resort · beachfront · breakfast for 2 · kayak use', car: 'Private A/C van from Tagbilaran + all boat hires for Balicasag & Virgin Island · full 2 days', itin: [{ d: 'Day 1 · 8 AM', t: 'Fast Ferry + Drive to Panglao', s: 'Fast ferry from Cebu City. Private van to Panglao Island (40 min).' }, { d: 'Day 1 · 11 AM', t: 'Hinagdanan Cave', s: 'Magical underground cave — turquoise pool, stalactites glowing in filtered light.' }, { d: 'Day 1 · 1 PM', t: 'Alona Beach BBQ Lunch', s: 'Beachfront BBQ. Free time to swim, snorkel, or explore the beach strip.' }, { d: 'Day 1 · 5 PM', t: 'Doljo Beach Sunset Dinner', s: 'Seafood dinner on the beach as the sky turns orange and pink.' }, { d: 'Day 2 · 7 AM', t: 'Balicasag Island', s: 'Boat to Balicasag Marine Sanctuary. Snorkel with hawksbill sea turtles.' }, { d: 'Day 2 · 11 AM', t: 'Virgin Island Sandbar', s: 'Secret sandbar at low tide — white sand in turquoise sea. Floating lunch here.' }] },
+      { id: 5, dest: 'cebu', dl: 'Cebu', name: 'Cebu North Island Escape', days: 2, nights: 1, ppp: 3299, p2: 6598, p4: 10998, best: false, stars: 5.0, rev: 87, img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=85', hl: ['🏝️ Kalanggaman Island', '🌴 Bantayan Beach', '💧 Dakit-Dakit Falls', '⛵ Malapascua Island', '🐚 Silica Sand Beach'], desc: 'Head north where the Philippines is at its most unspoiled — the legendary Kalanggaman sandbar, a beachfront night in Bantayan, a dawn boat to Malapascua, and a hidden falls detour on the way back.', spots: ['🏝️ Kalanggaman Island Long Sandbar', '🌴 Bantayan Island Beachfront', '💧 Dakit-Dakit Hidden Falls', '⛵ Malapascua Island', '🐚 Silica Sand Beach, Medellin'], food: ['Early coffee & pandesal', 'Island BBQ lunch on Kalanggaman', 'Calamares & buko snacks at Bantayan', 'Bantayan seafood boodle fight dinner', 'Hotel breakfast'], drinks: ['Welcome buko juice', 'Fresh fruit shakes at Bantayan', 'Cold refreshments in van', 'Unlimited water & softdrinks'], hotel: '1 night · Bantayan Island Beach Resort · beachfront · breakfast for 2', car: 'Private A/C van Cebu City to Hagnaya Port + all ferry crossings + full-tour driver', itin: [{ d: 'Day 1 · 5 AM', t: 'Drive to Hagnaya Port', s: 'Pre-dawn departure. 3-hour scenic north coast drive. Fast boat to Kalanggaman.' }, { d: 'Day 1 · 9 AM', t: 'Kalanggaman Island', s: "Philippines' most iconic sandbar. Snorkel, swim, and island BBQ lunch." }, { d: 'Day 1 · 2 PM', t: 'Ferry to Bantayan', s: 'Beautiful, unhurried Bantayan Island. Afternoon free time on the beach.' }, { d: 'Day 1 · 7 PM', t: 'Boodle Fight Dinner', s: 'Filipino feast on banana leaves — fresh seafood under the stars.' }, { d: 'Day 2 · 7 AM', t: 'Malapascua Island', s: 'Banca to Malapascua — world-famous for thresher shark sightings.' }, { d: 'Day 2 · 2 PM', t: 'Dakit-Dakit Falls & Return', s: 'Hidden falls detour before the drive back to Cebu City.' }] },
+      { id: 6, dest: 'combo', dl: 'Cebu + Bohol', name: 'Ultimate Cebu + Bohol Combo', days: 4, nights: 3, ppp: 9999, p2: 19998, p4: 33998, best: true, stars: 5.0, rev: 203, img: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&q=85', hl: ['🦈 Oslob Whale Sharks', '💧 Kawasan Falls', '🌄 Chocolate Hills Sunrise', '🐒 Tarsier Sanctuary', '🐢 Balicasag Turtles'], desc: 'The definitive Philippine island adventure — 4 days, 2 islands, 3 hotels, every meal, all drinks, a private car, and fast ferry both ways. The complete Jolito & Cheryl experience.', spots: ['🦈 Oslob Whale Sharks (Cebu Day 2)', '💧 Kawasan Falls (Cebu Day 2)', '🐒 Tarsier Sanctuary (Bohol Day 3)', '🌄 Chocolate Hills Sunrise (Bohol Day 4)', '🐢 Balicasag Marine Sanctuary (Bohol Day 4)'], food: ['Day 1: Heritage lunch & welcome dinner', 'Day 2: Island buffet lunch & seafood dinner', 'Day 3: Organic breakfast + Loboc River buffet + Boholano dinner', 'Day 4: Beachfront breakfast & floating BBQ lunch'], drinks: ['Daily welcome drinks (buko, mango or pineapple)', 'Unlimited water & softdrinks all 4 days', 'Bee Farm specialty drinks Day 3'], hotel: '3 nights: Night 1–2 Cebu City Hotel · Night 3 Bohol Bee Farm Eco-Resort · breakfast all days', car: 'Private A/C Toyota Hi-Ace · 4 full days · dedicated driver · fast ferry Cebu↔Bohol both ways', itin: [{ d: 'Day 1 – Cebu', t: 'Arrival & Heritage City Tour', s: "Airport pickup. Check-in. Heritage tour: Magellan's Cross, Fort San Pedro, Tops Lookout. Welcome dinner." }, { d: 'Day 2 – Cebu South', t: 'Whale Sharks + Sumilon + Kawasan Falls', s: '4 AM for Oslob whale sharks. Sumilon Island buffet lunch. Kawasan Falls trek. Overnight Moalboal.' }, { d: 'Day 3 – Bohol', t: 'Ferry + Tarsiers + Loboc + Chocolate Hills', s: 'Morning ferry Cebu→Bohol. Tarsier Sanctuary, Loboc River lunch, golden hour at Chocolate Hills.' }, { d: 'Day 4 – Bohol Islands', t: 'Chocolate Hills Sunrise + Balicasag + Return', s: '6 AM sunrise at Chocolate Hills. Boat to Balicasag sea turtles. Afternoon ferry back to Cebu.' }] }
     ];
 
     const REVIEWS_DATA = [
@@ -3493,22 +3937,32 @@
 
     /* ── PAST TRIPS ── */
     function renderTrips() {
-      const heights = [200, 240, 210, 230, 220, 200, 250, 220, 210];
+      const destColor = { cebu: 'var(--teal)', bohol: 'var(--green,#38BDF8)', combo: 'var(--coral,#60A5FA)' };
+      const destBg = { cebu: 'rgba(15,42,92,0.08)', bohol: 'rgba(56,189,248,0.10)', combo: 'rgba(96,165,250,0.10)' };
       document.getElementById('tripsGrid').innerHTML = PAST_TRIPS.map((t, i) => `
     <div class="trip-card rv">
-      <div class="trip-photo" style="height:${heights[i] || 220}px">
-        <img src="${t.img}" alt="${t.pkg}" loading="lazy" style="height:${heights[i] || 220}px;width:100%;background:linear-gradient(135deg,#0F2A5C,#1A3D7A)" onerror="this.style.opacity=0;this.parentElement.setAttribute('data-loaded','false')">
-        <div class="trip-photo-grad"></div>
-        <div class="trip-photo-top">
-          <span class="tdest ${t.dc}">${t.dest === 'combo' ? 'Cebu+Bohol' : t.dest === 'cebu' ? 'Cebu' : 'Bohol'}</span>
-          <span class="tdate">${t.date}</span>
-        </div>
-        <div class="trip-photo-bottom"><div class="trip-stars">${'★'.repeat(t.stars)}</div></div>
-      </div>
       <div class="trip-body">
-        <div class="trip-flag-row"><span class="trip-flag">${t.flag}</span><div><div class="trip-cname">${t.name}</div><div class="trip-cfrom">✈️ ${t.from}</div></div></div>
-        <div class="trip-pkg-lbl">${t.pkg}</div>
+        <!-- header row: flag + name + date badge -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+          <div class="trip-flag-row" style="margin-bottom:0">
+            <span class="trip-flag">${t.flag}</span>
+            <div>
+              <div class="trip-cname">${t.name}</div>
+              <div class="trip-cfrom">✈️ ${t.from}</div>
+            </div>
+          </div>
+          <span class="tdate" style="background:var(--sand);color:var(--text-2);font-size:10px;font-weight:700;padding:5px 12px;border-radius:50px;white-space:nowrap;letter-spacing:.5px;flex-shrink:0">${t.date}</span>
+        </div>
+        <!-- destination badge + stars -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <span class="tdest ${t.dc}" style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);background:rgba(56,189,248,0.10);border:1px solid rgba(56,189,248,0.22);padding:4px 12px;border-radius:50px">${t.dest === 'combo' ? 'Cebu + Bohol' : t.dest === 'cebu' ? 'Cebu' : 'Bohol'}</span>
+          <div class="trip-stars" style="font-size:13px;letter-spacing:2px">${'★'.repeat(t.stars)}</div>
+        </div>
+        <!-- package name -->
+        <div class="trip-pkg-lbl" style="margin-bottom:10px">${t.pkg}</div>
+        <!-- quote -->
         <p class="trip-quote">${t.quote}</p>
+        <!-- spots chips -->
         <div class="trip-chips">${t.spots.map(s => `<span class="tchip">${s}</span>`).join('')}</div>
       </div>
     </div>`).join('');
@@ -3703,6 +4157,229 @@
     renderReviews();
     initRv();
   </script>
-</body>
+  <!-- ═══════════════ AUTH MODAL ═══════════════ -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-backdrop" onclick="closeAuthModal()"></div>
+    <div class="auth-modal" id="authModal">
 
-</html>
+      <!-- TOP BANNER -->
+      <div class="am-top">
+        <button class="am-close" onclick="closeAuthModal()" aria-label="Close">✕</button>
+        <div class="am-brand">
+          <div class="am-mark">
+            <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13 13C13 13 10.3 7.5 6.5 7.5C2.91 7.5 0 10.41 0 13C0 15.59 2.91 18.5 6.5 18.5C10.3 18.5 13 13 13 13C13 13 15.7 18.5 19.5 18.5C23.09 18.5 26 15.59 26 13C26 10.41 23.09 7.5 19.5 7.5C15.7 7.5 13 13 13 13Z"
+                fill="none" stroke="#0F2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="am-bname">Aimfinite<small>Travel and Tour</small></div>
+        </div>
+        <div class="am-title" id="amTitle">Welcome back!</div>
+        <div class="am-sub" id="amSub">Sign in to build your custom itinerary.</div>
+        <div class="am-tabs">
+          <button class="am-tab on" id="tabLogin" onclick="amSwitchTab('login')">Sign In</button>
+          <button class="am-tab" id="tabRegister" onclick="amSwitchTab('register')">Register</button>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="am-body">
+
+        <!-- ── LOGIN FORM ── -->
+        <div id="amLoginForm">
+          <div class="am-success" id="amLoginSuccess">✅ Signed in! Taking you to your dashboard…</div>
+          <div class="am-fg" id="amLgEmailFg">
+            <label>Email Address</label>
+            <input type="email" id="amLgEmail" placeholder="juan@email.com" autocomplete="email">
+            <span class="am-err">Please enter a valid email address.</span>
+          </div>
+          <div class="am-fg" id="amLgPwFg">
+            <label>Password</label>
+            <div class="am-pw-wrap">
+              <input type="password" id="amLgPw" placeholder="Your password" autocomplete="current-password">
+              <button class="am-pw-eye" type="button" onclick="amTogglePw('amLgPw',this)">👁</button>
+            </div>
+            <span class="am-err">Password must be at least 6 characters.</span>
+          </div>
+          <span class="am-forgot" onclick="showToast('📧 Password reset link sent to your email!')">Forgot
+            password?</span>
+          <button class="am-submit" id="amLgBtn" onclick="amDoLogin()">
+            Sign In <span style="font-size:17px">→</span>
+          </button>
+          <div class="am-div">or continue with</div>
+          <div class="am-soc">
+            <button class="am-soc-btn" onclick="amSocial('Google')">🔍 Google</button>
+            <button class="am-soc-btn" onclick="amSocial('Facebook')">f Facebook</button>
+          </div>
+          <div class="am-switch">Don't have an account? <a onclick="amSwitchTab('register')">Register free</a></div>
+        </div>
+
+        <!-- ── REGISTER FORM ── -->
+        <div id="amRegisterForm" style="display:none">
+          <div class="am-success" id="amRegSuccess">🎉 Account created! Taking you to your dashboard…</div>
+          <div class="am-fgr">
+            <div class="am-fg" id="amRgFnFg">
+              <label>First Name</label>
+              <input type="text" id="amRgFn" placeholder="Juan" autocomplete="given-name">
+              <span class="am-err">Required.</span>
+            </div>
+            <div class="am-fg" id="amRgLnFg">
+              <label>Last Name</label>
+              <input type="text" id="amRgLn" placeholder="dela Cruz" autocomplete="family-name">
+              <span class="am-err">Required.</span>
+            </div>
+          </div>
+          <div class="am-fg" id="amRgEmFg">
+            <label>Email Address</label>
+            <input type="email" id="amRgEm" placeholder="juan@email.com" autocomplete="email">
+            <span class="am-err">Please enter a valid email address.</span>
+          </div>
+          <div class="am-fg" id="amRgPhFg">
+            <label>Phone / Viber</label>
+            <input type="tel" id="amRgPh" placeholder="+63 9XX XXX XXXX" autocomplete="tel">
+            <span class="am-err">Required.</span>
+          </div>
+          <div class="am-fg" id="amRgPwFg">
+            <label>Password</label>
+            <div class="am-pw-wrap">
+              <input type="password" id="amRgPw" placeholder="At least 6 characters" autocomplete="new-password">
+              <button class="am-pw-eye" type="button" onclick="amTogglePw('amRgPw',this)">👁</button>
+            </div>
+            <span class="am-err">Password must be at least 6 characters.</span>
+          </div>
+          <div class="am-fg" id="amRgPw2Fg">
+            <label>Confirm Password</label>
+            <div class="am-pw-wrap">
+              <input type="password" id="amRgPw2" placeholder="Re-enter password" autocomplete="new-password">
+              <button class="am-pw-eye" type="button" onclick="amTogglePw('amRgPw2',this)">👁</button>
+            </div>
+            <span class="am-err">Passwords do not match.</span>
+          </div>
+          <label class="am-terms">
+            <input type="checkbox" id="amRgAgree">
+            I agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>
+          </label>
+          <button class="am-submit" id="amRgBtn" onclick="amDoRegister()">
+            Create Account <span style="font-size:17px">→</span>
+          </button>
+          <div class="am-div">or continue with</div>
+          <div class="am-soc">
+            <button class="am-soc-btn" onclick="amSocial('Google')">🔍 Google</button>
+            <button class="am-soc-btn" onclick="amSocial('Facebook')">f Facebook</button>
+          </div>
+          <div class="am-switch">Already have an account? <a onclick="amSwitchTab('login')">Sign in</a></div>
+        </div>
+
+      </div><!-- /am-body -->
+    </div><!-- /auth-modal -->
+  </div><!-- /auth-overlay -->
+
+  <script>
+    /* ══════════════ AUTH MODAL ══════════════ */
+    function openAuthModal(tab = 'login') {
+      document.getElementById('authOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      amSwitchTab(tab);
+      // Focus first field after animation
+      setTimeout(() => {
+        const f = document.getElementById(tab === 'login' ? 'amLgEmail' : 'amRgFn');
+        if (f) f.focus();
+      }, 380);
+    }
+    function closeAuthModal() {
+      document.getElementById('authOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeAuthModal();
+      if (e.key === 'Enter') {
+        const ov = document.getElementById('authOverlay');
+        if (!ov.classList.contains('open')) return;
+        if (document.getElementById('amLoginForm').style.display !== 'none') amDoLogin();
+        else amDoRegister();
+      }
+    });
+
+    function amSwitchTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('tabLogin').classList.toggle('on', isLogin);
+      document.getElementById('tabRegister').classList.toggle('on', !isLogin);
+      document.getElementById('amLoginForm').style.display = isLogin ? 'block' : 'none';
+      document.getElementById('amRegisterForm').style.display = isLogin ? 'none' : 'block';
+      document.getElementById('amTitle').textContent = isLogin ? 'Welcome back!' : 'Create your account';
+      document.getElementById('amSub').textContent = isLogin ? 'Sign in to build your custom itinerary.' : 'Join free — build and save custom tour packages.';
+      // Clear any error states
+      document.querySelectorAll('.am-fg.err').forEach(f => f.classList.remove('err'));
+      document.querySelectorAll('.am-success').forEach(s => s.style.display = 'none');
+    }
+
+    function amSetErr(id, show) {
+      document.getElementById(id).classList.toggle('err', show);
+    }
+
+    function amTogglePw(inputId, btn) {
+      const inp = document.getElementById(inputId);
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+      btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+    }
+
+    function amDoLogin() {
+      const em = document.getElementById('amLgEmail').value.trim();
+      const pw = document.getElementById('amLgPw').value;
+      let ok = true;
+      if (!em || !em.includes('@')) { amSetErr('amLgEmailFg', true); ok = false; } else { amSetErr('amLgEmailFg', false); }
+      if (pw.length < 6) { amSetErr('amLgPwFg', true); ok = false; } else { amSetErr('amLgPwFg', false); }
+      if (!ok) return;
+
+      // Save session
+      const firstName = em.split('@')[0];
+      const user = { name: firstName, firstName, email: em, loggedIn: true, loginTime: Date.now() };
+      localStorage.setItem('aimfinite_user', JSON.stringify(user));
+
+      // Show success then redirect
+      const btn = document.getElementById('amLgBtn');
+      btn.disabled = true;
+      btn.innerHTML = '✓ Signed in! Redirecting…';
+      document.getElementById('amLoginSuccess').style.display = 'block';
+      setTimeout(() => window.location.href = 'aimtravel-dashboard.html', 1300);
+    }
+
+    function amDoRegister() {
+      const fn = document.getElementById('amRgFn').value.trim();
+      const ln = document.getElementById('amRgLn').value.trim();
+      const em = document.getElementById('amRgEm').value.trim();
+      const ph = document.getElementById('amRgPh').value.trim();
+      const pw = document.getElementById('amRgPw').value;
+      const pw2 = document.getElementById('amRgPw2').value;
+      const agree = document.getElementById('amRgAgree').checked;
+      let ok = true;
+      if (!fn) { amSetErr('amRgFnFg', true); ok = false; } else { amSetErr('amRgFnFg', false); }
+      if (!ln) { amSetErr('amRgLnFg', true); ok = false; } else { amSetErr('amRgLnFg', false); }
+      if (!em || !em.includes('@')) { amSetErr('amRgEmFg', true); ok = false; } else { amSetErr('amRgEmFg', false); }
+      if (!ph) { amSetErr('amRgPhFg', true); ok = false; } else { amSetErr('amRgPhFg', false); }
+      if (pw.length < 6) { amSetErr('amRgPwFg', true); ok = false; } else { amSetErr('amRgPwFg', false); }
+      if (pw !== pw2) { amSetErr('amRgPw2Fg', true); ok = false; } else { amSetErr('amRgPw2Fg', false); }
+      if (!agree) { showToast('⚠️ Please accept the Terms of Service to continue.'); return; }
+      if (!ok) return;
+
+      // Save session
+      const user = { name: fn + ' ' + ln, firstName: fn, lastName: ln, email: em, phone: ph, loggedIn: true, loginTime: Date.now() };
+      localStorage.setItem('aimfinite_user', JSON.stringify(user));
+
+      // Show success then redirect
+      const btn = document.getElementById('amRgBtn');
+      btn.disabled = true;
+      btn.innerHTML = '🎉 Account created! Redirecting…';
+      document.getElementById('amRegSuccess').style.display = 'block';
+      setTimeout(() => window.location.href = 'aimtravel-dashboard.html', 1300);
+    }
+
+    function amSocial(provider) {
+      const user = { name: 'Traveler', firstName: 'Traveler', email: `user@${provider.toLowerCase()}.com`, loggedIn: true, loginTime: Date.now() };
+      localStorage.setItem('aimfinite_user', JSON.stringify(user));
+      showToast(`✓ Signing in with ${provider}…`);
+      setTimeout(() => window.location.href = 'aimtravel-dashboard.html', 900);
+    }
+  </script>
+</body>
